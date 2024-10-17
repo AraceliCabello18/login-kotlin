@@ -15,6 +15,31 @@ const conexion = mysql.createConnection({
   password: ''
 })
 
+conexion.connect(error =>{
+  if(error)throw error
+  console.log('Conexion Exitosa a la Base de Datos')
+})
+
+app.get('/',(req, res)=>{
+  res.send('API')
+})
+
+app.post('/appInicioSesion',(req, res)=>{
+  const correo = req.body.correo
+  const contrasena = req.body.contrasena
+
+  const query = 'SELECT*FROM t_usuario WHERE correo =? AND contrasena = ?';
+
+  conexion.query(query[correo,contrasena],(error, results)=>{
+    if(errro){
+      console.error(error)
+      
+      
+    }
+  })
+
+})
+
 app.post('/appAgregarUsuario', (req, res) =>{
   const usuario = {
   nombre: req.body.nombre,
